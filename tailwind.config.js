@@ -14,11 +14,11 @@ export default {
     extend: {
       width: {
         'player-large': '896px',
-        'player-small': '640px',
+        'player-small': '456px',
 
       height:{
         'player-large': '640px',
-        'player-small': '480px',
+        'player-small': '1219px',
       }
       },
     },
