@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SongInfo = () => {
+const SongTitle = () => {
   return (
     <div className="w-400"> 
       <h2 className="font-inter text-2xl text-black font-bold h-29">Song Title</h2>
@@ -9,4 +9,4 @@ const SongInfo = () => {
   );
 };
 
-export default SongInfo;
+export default SongTitle;
