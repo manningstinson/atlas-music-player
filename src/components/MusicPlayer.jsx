@@ -4,13 +4,14 @@ import SongTitle from "./SongTitle";
 import VolumeControls from "./VolumeControls";
 
 export default function MusicPlayer() {
-  return <div className="w-player-large h-player-large md:w-player-small md:h-player-small">
-  <>
-    {/* Your music player content here */}
-    <CoverArt />
-    <SongTitle />
-    <PlayControls />
-    <VolumeControls />
-  </>
-</div>
+ return (
+   <div className="max-w-xl flex flex-col gap-4">
+     <CoverArt />
+     <div className="max-w-xl px-4">
+       <SongTitle />
+       <PlayControls />
+        <VolumeControls />
+     </div>
+   </div>
+ );
 }
