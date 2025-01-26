@@ -1,19 +1,47 @@
-import CoverArt from "./CoverArt";
-import PlayControls from "./PlayControls";
-import VolumeControls from "./VolumeControls";
-import CurrentlyPlaying from "./CurrentlyPlaying";
-import PlayList from "./PlayList";
+import React from 'react';
+import CoverArt from './CoverArt';
+import PlayControls from './PlayControls';
+import VolumeControls from './VolumeControls';
+import CurrentlyPlaying from './CurrentlyPlaying';
+import PlayList from './PlayList';
 
-export default function MusicPlayer() {
+const MusicPlayer = () => {
   return (
-    <div className="max-w-xl flex flex-col gap-4">
-      <CoverArt />
-      <CurrentlyPlaying />
-      <div className="max-w-xl px-2">
-        <PlayControls />
-        <VolumeControls />
+    <div>
+      {/* Large Screen Layout */}
+      <div className="hidden lg:flex justify-between max-w-6xl mx-auto">
+        {/* Left Column */}
+        <div className="max-w-xl flex flex-col gap-4">
+          <CoverArt />
+          <CurrentlyPlaying />
+          <div className="max-w-xl px-2">
+            <PlayControls />
+            <VolumeControls />
+          </div>
+        </div>
+
+        {/* Right Column */}
+        <div className="w-135">
+          <PlayList />
+        </div>
       </div>
-      <PlayList />
+
+      {/* Small Screen Layout */}
+      <div className="lg:hidden flex flex-col gap-4">
+        <div className="max-w-xl flex flex-col gap-4">
+          <CoverArt />
+          <CurrentlyPlaying />
+          <div className="max-w-xl px-2">
+            <PlayControls />
+            <VolumeControls />
+          </div>
+        </div>
+        <div className="max-w-xl">
+          <PlayList />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default MusicPlayer;
