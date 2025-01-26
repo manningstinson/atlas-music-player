@@ -12,7 +12,7 @@ const VolumeControls = () => {
               min="0" 
               max="100" 
               value="50"
-              className="w-full bg-gradient-to-r from-blue-900 from-50% via-gray-200 via-50% to-gray-200 rounded-lg appearance-none cursor-pointer"
+              className="w-full h-4 mt-1 bg-gradient-to-r from-blue-900 from-50% via-gray-200 via-50% to-gray-200 rounded-lg appearance-none cursor-pointer"
            />
             </div>
      </div>

@@ -18,7 +18,7 @@ const Playlist = () => {
   return (
     <div>
       <div className="text-2xl font-bold mb-4">Playlist</div>
-      <div className="space-y-2">
+      <div className="space-y-2 rounded-">
         {songs.map((song) => (
           <PlayListItem
             key={song.id}

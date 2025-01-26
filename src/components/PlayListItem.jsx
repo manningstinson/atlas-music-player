@@ -9,7 +9,7 @@ const PlayListItem = ({
   return (
     <div 
       className={`
-        flex items-center justify-between px-4 py-2 
+        flex items-center justify-between px-4 py-2 rounded-lg 
         ${isSelected ? 'bg-blue-100' : 'bg-gray-100'}
       `}
     >
