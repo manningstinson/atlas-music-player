@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+
 :root {
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -11,14 +12,6 @@
 }
 
 @layer base {
-  html, body {
-    background-color: white;
-  }
-
-  html.dark, .dark body {
-    background-color: #464659;
-  }
-
   *,
   *::after,
   *::before,
@@ -34,21 +27,21 @@
   }
 
   .playlist-title {
-    color: #464659; /* for not playing text */
+    color: #464659;
   }
 
   .playlist-title-selected {
-    color: white; /* for currently playing text */
+    color: white;
   }
 
   .playlist-artist {
     color: #464659;
-    opacity: 0.8; /* for not playing text with some opacity */
+    opacity: 0.8;
   }
 
   .playlist-artist-selected {
     color: white;
-    opacity: 0.8; /* for currently playing text with some opacity */
+    opacity: 0.8;
   }
 
   .currently-playing {
@@ -62,18 +55,24 @@
   .playlist-bg {
     background-color: #fafafa;
   }
-  
-  /* Add icon color inversion for dark mode */
+
   .icon-color {
     filter: invert(1) brightness(2);
   }
 
   .dark .currently-playing {
-  background-color: #28B8E0;
-}
+    background-color: #28B8E0;
+  }
 
-  /* Dark mode style just for range input */
   .dark input[type="range"] {
     background: linear-gradient(to right, #28B8E0 50%, #eee 50%);
+  }
+
+  .bg-white {
+    background-color: white;
+  }
+
+  .dark .dark\:bg-\[\#464659\] {
+    background-color: #464659;
   }
 }

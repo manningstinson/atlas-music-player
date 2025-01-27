@@ -10,16 +10,21 @@ const ThemeToggle = () => {
   });
 
   useEffect(() => {
-    const handleSystemThemeChange = (e) => {
+    updateTheme(theme);
+  }, []);
+
+  useEffect(() => {
+    const handleSystemThemeChange = () => {
       if (theme === 'system') {
         updateTheme('system');
       }
     };
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleSystemThemeChange);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
 
     return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleSystemThemeChange);
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
     };
   }, [theme]);
 
@@ -29,10 +34,10 @@ const ThemeToggle = () => {
 
   const updateTheme = (newTheme) => {
     const root = window.document.documentElement;
-    const isDark = newTheme === 'dark' || 
-      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDark = newTheme === 'dark' || (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-    root.classList.toggle('dark', isDark);
+    root.classList.remove('light', 'dark');
+    root.classList.add(isDark ? 'dark' : 'light');
     localStorage.setItem('theme', newTheme);
   };
 
@@ -43,23 +48,25 @@ const ThemeToggle = () => {
   ];
 
   return (
-    <div className="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-      {buttons.map(({ name, icon: Icon }) => (
-        <button
-          key={name}
-          onClick={() => setTheme(name)}
-          className={`
-            p-2 rounded-md text-sm flex items-center gap-2 capitalize
-            ${theme === name ? 
-              'bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-white' : 
-              'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-            }
-          `}
-        >
-          <Icon className="w-4 h-4" />
-          {name}
-        </button>
-      ))}
+    <div className="flex justify-center py-4">
+      <div className="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+        {buttons.map(({ name, icon: Icon }) => (
+          <button
+            key={name}
+            onClick={() => setTheme(name)}
+            className={`
+              p-2 rounded-md text-sm flex items-center gap-2 capitalize
+              ${theme === name ?
+                'bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-white' :
+                'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }
+            `}
+          >
+            <Icon className="w-4 h-4" />
+            {name}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

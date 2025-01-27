@@ -11,7 +11,7 @@ const MusicPlayer = () => {
       {/* Large Screen Layout */}
       <div className="hidden lg:flex justify-between max-w-6xl mx-auto">
         {/* Left Column */}
-        <div className="max-w-xl flex flex-col gap-4">
+        <div className="max-w-xl flex flex-col gap-4 bg-white">
           <CoverArt />
           <CurrentlyPlaying />
           <div className="max-w-xl px-2">
@@ -19,16 +19,15 @@ const MusicPlayer = () => {
             <VolumeControls />
           </div>
         </div>
-
         {/* Right Column */}
-        <div className="w-135">
+        <div className="w-135 bg-white dark:bg-[#464659]">
           <PlayList />
         </div>
       </div>
 
       {/* Small Screen Layout */}
       <div className="lg:hidden flex flex-col gap-4">
-        <div className="max-w-xl flex flex-col gap-4">
+        <div className="max-w-xl flex flex-col gap-4 bg-white">
           <CoverArt />
           <CurrentlyPlaying />
           <div className="max-w-xl px-2">
@@ -36,7 +35,7 @@ const MusicPlayer = () => {
             <VolumeControls />
           </div>
         </div>
-        <div className="max-w-xl">
+        <div className="max-w-xl bg-white dark:bg-[#464659]">
           <PlayList />
         </div>
       </div>
