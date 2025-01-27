@@ -13,14 +13,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   useEffect(() => {
     const audio = audioRef.current;
-    
+
     if (currentSong) {
       audio.src = currentSong.audioUrl;
       if (isPlaying) {
         audio.play().catch(err => onError(new Error(err.message)));
       }
     }
-    
+
     audio.volume = volume;
     audio.playbackRate = playbackSpeed;
 
@@ -28,7 +28,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       audio.pause();
       audio.src = '';
     };
-  }, [currentSong, isPlaying, volume, playbackSpeed]);
+  }, [currentSong, isPlaying, volume, playbackSpeed, onError]);
 
   useEffect(() => {
     const audio = audioRef.current;

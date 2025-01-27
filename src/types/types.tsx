@@ -21,7 +21,7 @@ export interface Playlist {
 }
 
 export interface PlayerState {
-  currentSong: Song | null;
+  currentSong: Song;
   isPlaying: boolean;
   volume: number; // 0 to 1
   playbackSpeed: 0.5 | 1 | 2;
@@ -57,23 +57,21 @@ export interface VolumeControlsProps {
   onVolumeChange: (volume: number) => void;
 }
 
+
 export interface PlayListProps {
-  playlist: Playlist;
-  currentSong: Song | null;
+
+   playlist: {
+    songs: Song[];
+  };
+  currentSong?: Song;
   onSongSelect: (song: Song) => void;
+  className?: string;
 }
 
 
 export interface PlayListItemProps {
 
-  song: {
-
-    title: string;
-    artist: string;
-    duration: number;
-
-  };
-
+ song: Song;
   isActive: boolean;
   onClick: () => void;
   className?: string;

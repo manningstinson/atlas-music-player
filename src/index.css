@@ -1,61 +1,72 @@
 @import 'tailwindcss';
 :root {
---breakpoint-sm: 640px;
---breakpoint-md: 768px;
---breakpoint-lg: 1024px;
---breakpoint-xl: 1280px;
---width-player-large: 896px;
---width-player-small: 456px;
---width-height-player-large: 640px;
---width-height-player-small: 1219px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --width-player-large: 896px;
+  --width-player-small: 456px;
+  --width-height-player-large: 640px;
+  --width-height-player-small: 1219px;
 }
 @layer base {
-*,
-*::after,
-*::before,
-*::backdrop,
- ::file-selector-button {
- border-color: var(--color-gray-200, currentColor);
- }
+  *,
+  *::after,
+  *::before,
+  *::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
 }
 @layer components {
-.volume-controls input[type="range"] {
---volume-gradient: linear-gradient(to right, #464659 var(--volume), #eee var(--volume));
- background: var(--volume-gradient);
- }
-.dark .volume-controls input[type="range"] {
---volume-gradient: linear-gradient(to right, #196aac var(--volume), #eee var(--volume));
- background: var(--volume-gradient);
- }
-.playlist-title {
- color: #464659;
- }
-.playlist-title-selected {
- color: white;
- }
-.playlist-artist {
- color: #464659;
- opacity: 0.8;
- }
-.playlist-artist-selected {
- color: white;
- opacity: 0.8;
- }
-.currently-playing {
- background-color: #464659;
- padding: .2rem .5rem;
- }
-.currently-playing-text {
- color: #FFF;
- }
-.icon-color {
- filter: invert(1) brightness(2);
- }
-.dark .currently-playing {
- background-color: #196aac;
- }
-.bg-white {
- background-color: white;
- }
-
-};
+  .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #464659 var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
+  }
+  .dark .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #196aac var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
+  }
+  .playlist-title {
+    color: #464659;
+    font-size: 0.8rem; /* Set font size for playlist titles */
+    font-weight: bold; /* Set font weight for playlist titles */
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .playlist-title-selected {
+    color: white;
+    font-size: 0.8rem; /* Set font size for selected playlist titles */
+    font-weight: bold; /* Set font weight for selected playlist titles */
+     font-family: Arial, Helvetica, sans-serif;
+  }
+  .playlist-artist {
+    color: #464659;
+    opacity: 0.8;
+    font-size: 0.8rem; /* Set font size for playlist artists */
+    font-weight: bold; /* Set font weight for playlist artists */
+     font-family: Arial, Helvetica, sans-serif;
+  }
+  .playlist-artist-selected {
+    color: white;
+    opacity: 0.8;
+    font-size: 0.8rem; /* Set font size for selected playlist artists */
+    font-weight: bold; /* Set font weight for selected playlist artists */
+     font-family: Arial, Helvetica, sans-serif;
+  }
+  .currently-playing {
+    background-color: #464659;
+    padding: .2rem .5rem;
+  }
+  .currently-playing-text {
+    color: #FFF;
+  }
+  .icon-color {
+    filter: invert(1) brightness(2);
+  }
+  .dark .currently-playing {
+    background-color: #196aac;
+  }
+  .bg-white {
+    background-color: white;
+  }
+}
