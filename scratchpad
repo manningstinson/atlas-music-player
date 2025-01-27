@@ -1,0 +1,13 @@
+<div className="flex items-center gap-2">
+      <img src={VolumeIcon} alt="Volume Icon" className="w-6 h-6" />
+      <div className="relative flex-grow flex items-center">
+        <img src={VolumeSlider} alt="Volume Slider" className="w-full" />
+        <img src={Volume}  alt="Volume Knob" className="absolute left-1/2 w-6 h-6 -translate-y-1/2 top-1/2" />
+      </div>
+    </div>
+    
+
+            <div className="flex items-center gap-2 pt-8">
+      <img src={VolumeIcon} alt="Volume Icon" className="w-6 h-6" />
+      <img src={VolumeSlider} alt="Volume Slider" className="w-full" />
+    </div>
