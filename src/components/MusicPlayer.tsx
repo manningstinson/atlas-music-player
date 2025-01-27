@@ -14,7 +14,7 @@ const DEFAULT_SONG: Song = {
   artist: '',
   duration: 0,
   coverArt: '/default-cover.jpg',
-  audioUrl: '',
+  audioUrl: ''
 };
 
 const MusicPlayer: React.FC = () => {
@@ -51,11 +51,10 @@ const MusicPlayer: React.FC = () => {
           throw new Error('Expected an array of songs');
         }
 
-        // Transform the songs data to include audio URLs
         const processedSongs: Song[] = songsData.map(song => ({
           ...song,
           coverArt: `/covers/${song.id}.jpg`,
-          audioUrl: `/audio/${song.id}.mp3`,
+          audioUrl: `https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3`
         }));
 
         const newPlaylist: Playlist = {
