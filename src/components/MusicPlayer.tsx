@@ -1,4 +1,3 @@
-import React from 'react';
 import CoverArt from './CoverArt';
 import PlayControls from './PlayControls';
 import VolumeControls from './VolumeControls';

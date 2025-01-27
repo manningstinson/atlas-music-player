@@ -1,4 +1,3 @@
-import React from "react";
 import PlatySpeed from "../assets/icons/play-speed.svg";
 import Back from "../assets/icons/back.svg";
 import PlayPause from "../assets/icons/play-pause.svg";

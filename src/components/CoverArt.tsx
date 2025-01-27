@@ -1,4 +1,3 @@
-import React from "react";
 import coverArt from '../assets/painted-in-blue.jpeg';
 
 const CoverArt = () => {

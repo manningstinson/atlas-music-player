@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sun, Moon, Monitor } from 'lucide-react';
 
 const ThemeToggle = () => {
@@ -32,7 +32,7 @@ const ThemeToggle = () => {
     updateTheme(theme);
   }, [theme]);
 
-  const updateTheme = (newTheme) => {
+  const updateTheme = (newTheme: string) => {
     const root = window.document.documentElement;
     const isDark = newTheme === 'dark' || (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 

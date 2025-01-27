@@ -1,6 +1,11 @@
-import React from 'react';
+type PlayListItemProps = {
+  title: string;
+  artist: string;
+  length: string;
+  isSelected?: boolean;
+};
 
-const PlayListItem = ({
+const PlayListItem: React.FC<PlayListItemProps> = ({
   title,
   artist,
   length,

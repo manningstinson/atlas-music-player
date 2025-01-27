@@ -1,4 +1,3 @@
-import React from "react";
 import SpeakerIcon from "../assets/icons/speaker-icon.svg";
 
 const VolumeControls = () => {
