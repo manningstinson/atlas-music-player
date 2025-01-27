@@ -1,7 +1,5 @@
 @import 'tailwindcss';
-
 :root {
-  /* --breakpoint-*: initial; */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -12,14 +10,15 @@
   --width-height-player-small: 1219px;
 }
 
-/**
- * The default border color has changed to `currentColor` in Tailwind CSS v4,
- * so we've added these compatibility styles to make sure everything still
- * looks the same as it did with Tailwind CSS v3.
- * If we ever want to remove these styles, we need to add an explicit border
- * color utility to any element that depends on these defaults.
- */
 @layer base {
+  html, body {
+    background-color: white;
+  }
+
+  html.dark, .dark body {
+    background-color: #464659;
+  }
+
   *,
   *::after,
   *::before,
@@ -33,9 +32,7 @@
   input[type="range"] {
     background: linear-gradient(to right, #464659 50%, #eee 50%);
   }
-}
 
-@layer components {
   .playlist-title {
     color: #464659; /* for not playing text */
   }
@@ -64,5 +61,19 @@
 
   .playlist-bg {
     background-color: #fafafa;
+  }
+  
+  /* Add icon color inversion for dark mode */
+  .icon-color {
+    filter: invert(1) brightness(2);
+  }
+
+  .dark .currently-playing {
+  background-color: #28B8E0;
+}
+
+  /* Dark mode style just for range input */
+  .dark input[type="range"] {
+    background: linear-gradient(to right, #28B8E0 50%, #eee 50%);
   }
 }

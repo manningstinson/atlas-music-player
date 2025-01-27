@@ -4,7 +4,7 @@ import SpeakerIcon from "../assets/icons/speaker-icon.svg";
 const VolumeControls = () => {
   return (
     <div className="volume-container flex gap-2 w-full">
-      <img src={SpeakerIcon} alt="Volume Icon" className="volume-icon w-6 h-6" />
+      <img src={SpeakerIcon} alt="Volume Icon" className="volume-icon w-6 h-6 dark:invert" />
       <div className="volume-container flex w-full">
         <input
           type="range"
