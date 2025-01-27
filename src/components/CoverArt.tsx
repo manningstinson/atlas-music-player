@@ -1,35 +1,31 @@
-import { useState } from 'react';
-import defaultCoverArt from '../assets/placeholder.svg';
+import React from "react";
 import { CoverArtProps } from '../types/types';
 
-const CoverArt: React.FC<CoverArtProps> = ({ currentSong, onMouseEnter, onMouseLeave }) => {
-  const [showLyrics, setShowLyrics] = useState(false);
-
-  const handleMouseEnter = () => {
-    setShowLyrics(true);
-    onMouseEnter?.();  // Optional chaining as onMouseEnter is optional
-  };
-
-  const handleMouseLeave = () => {
-    setShowLyrics(false);
-    onMouseLeave?.();  // Optional chaining as onMouseLeave is optional
-  };
-
+const CoverArt: React.FC<CoverArtProps> = ({ currentSong }) => {
   return (
-    <div 
-      className="w-full h-full relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <img
-        src={currentSong?.coverArt || defaultCoverArt}
-        alt={currentSong?.title ? `${currentSong.title} by ${currentSong.artist}` : 'Album Cover'}
-        className="w-full h-full rounded-lg object-cover"
-      />
-      
-      {showLyrics && currentSong?.lyrics && (
-        <div className="absolute inset-0 bg-black bg-opacity-75 rounded-lg p-4 overflow-y-auto text-white">
-          <p className="whitespace-pre-line">{currentSong.lyrics}</p>
+    <div className="w-[450px] h-[450px]">
+      {currentSong?.coverArt ? (
+        <img
+          src={currentSong.coverArt}
+          alt={`${currentSong.title} cover`}
+          className="w-full h-full rounded-lg"
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+          <svg
+            className="w-24 h-24 text-gray-400"
+            fill="none"
+            viewBox="0 0 48 48"
+          >
+            <path
+              d="M24 4C12.96 4 4 12.96 4 24s8.96 20 20 20 20-8.96 20-20S35.04 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"
+              fill="currentColor"
+            />
+            <path
+              d="M24 14.4c-5.84 0-10.6 4.76-10.6 10.6 0 5.84 4.76 10.6 10.6 10.6 5.84 0 10.6-4.76 10.6-10.6 0-5.84-4.76-10.6-10.6-10.6zm0 17.2c-3.64 0-6.6-2.96-6.6-6.6 0-3.64 2.96-6.6 6.6-6.6 3.64 0 6.6 2.96 6.6 6.6 0 3.64-2.96 6.6-6.6 6.6z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       )}
     </div>

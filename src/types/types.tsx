@@ -1,5 +1,4 @@
-// src/types/types.ts
-
+// src/types/types.tsx
 export interface Song {
   id: string;
   title: string;
@@ -8,6 +7,11 @@ export interface Song {
   coverArt: string;
   audioUrl: string;
   lyrics?: string;
+}
+
+
+export interface SongTitleProps {
+  currentSong?: Song;
 }
 
 export interface Playlist {
@@ -24,14 +28,14 @@ export interface PlayerState {
   isShuffle: boolean;
 }
 
-// Props interfaces for each component
+// Props interfaces
 export interface CoverArtProps {
   currentSong: Song | null;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 }
 
-export interface SongTitleProps {
+export interface CurrentlyPlayingProps {
   currentSong: Song | null;
 }
 
@@ -53,8 +57,37 @@ export interface VolumeControlsProps {
   onVolumeChange: (volume: number) => void;
 }
 
+export interface PlayListProps {
+  playlist: Playlist;
+  currentSong: Song | null;
+  onSongSelect: (song: Song) => void;
+}
+
+
 export interface PlayListItemProps {
-  song: Song;
+
+  song: {
+
+    title: string;
+    artist: string;
+    duration: number;
+
+  };
+
   isActive: boolean;
   onClick: () => void;
+  className?: string;
+
 }
+
+
+export interface AudioPlayerProps {
+  currentSong: Song | null;
+  isPlaying: boolean;
+  volume: number;
+  playbackSpeed: 0.5 | 1 | 2;
+  onEnded: () => void;
+  onError: (error: Error) => void;
+}
+
+

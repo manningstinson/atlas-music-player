@@ -1,48 +1,20 @@
-import SpeakerIcon from "../assets/icons/speaker-icon.svg";
+import { VolumeControlsProps } from '../types/types';
+import Speaker from "../assets/icons/speaker-icon.svg";
 
-interface VolumeControlsProps {
-  volume?: number;
-  onVolumeChange?: (volume: number) => void;
-}
-
-const VolumeControls: React.FC<VolumeControlsProps> = ({ 
-  volume = 50,
-  onVolumeChange = () => {} 
-}) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = Number(e.target.value);
-    onVolumeChange(newVolume);
-  };
-
+const VolumeControls: React.FC<VolumeControlsProps> = ({ volume, onVolumeChange }) => {
   return (
-    <div className="volume-container flex gap-2 w-full">
-      <img 
-        src={SpeakerIcon} 
-        alt="Volume Icon" 
-        className="volume-icon w-6 h-6 dark:invert" 
+    <div className="volume-controls flex items-center gap-2">
+      <img src={Speaker} alt="Volume" className="w-6 h-6" />
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value={volume}
+        onChange={(e) => onVolumeChange(Number(e.target.value))}
+        className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+        style={{ '--volume': `${volume * 100}%` } as React.CSSProperties}
       />
-      <div className="volume-container flex w-full">
-        <style>
-          {`
-            @layer components {
-              input[type="range"] {
-                background: linear-gradient(to right, #464659 ${volume}%, #eee ${volume}%) !important;
-              }
-              .dark input[type="range"] {
-                background: linear-gradient(to right, #196aac ${volume}%, #eee ${volume}%) !important;
-              }
-            }
-          `}
-        </style>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={handleChange}
-          className="w-full h-4 mt-1 rounded-lg appearance-none cursor-pointer"
-        />
-      </div>
     </div>
   );
 };
