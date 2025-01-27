@@ -61,11 +61,11 @@
   }
 
   .dark .currently-playing {
-    background-color: #28B8E0;
+    background-color: #196aac;
   }
 
   .dark input[type="range"] {
-    background: linear-gradient(to right, #28B8E0 50%, #eee 50%);
+    background: linear-gradient(to right, #196aac 50%, #eee 50%);
   }
 
   .bg-white {

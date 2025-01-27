@@ -49,7 +49,7 @@ const ThemeToggle = () => {
 
   return (
     <div className="flex justify-center py-4">
-      <div className="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+      <div className="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg -mt-7">
         {buttons.map(({ name, icon: Icon }) => (
           <button
             key={name}

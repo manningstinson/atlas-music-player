@@ -2,9 +2,9 @@ import React from 'react';
 
 const CurrentlyPlaying = () => {
   return (
-    <div className="flex items-center justify-between py-2">
-      <div className="flex-1 truncate">
-        <div className=" text-3xl font-bold truncate text-gray-900">
+    <div className="flex items-center justify-between py-2 border border-gray-500 p-3 rounded-lg">
+      <div className="flex-1 truncate ">
+        <div className=" text-3xl font-bold truncate text-gray-900 ">
           Painted in Blue
         </div>
         <div className="text-2xl truncate text-gray-500">

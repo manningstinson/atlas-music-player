@@ -8,7 +8,7 @@ import Skip from "../assets/icons/skip.svg";
 
 const PlayControls = () => {
     return (
-<div className="flex items-center justify-between full pt-8 pb-4 ">
+<div className="flex items-center justify-between full pb-4 ">
       <img src={PlatySpeed} alt="Speed" className="w-6 h-6" />
       <img src={Back} alt="Previous" className="w-6 h-6" />
       <img src={PlayPause} alt="Play/Pause" className="w-8 h-8" />
