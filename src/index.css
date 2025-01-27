@@ -22,8 +22,14 @@
 }
 
 @layer components {
-  input[type="range"] {
-    background: linear-gradient(to right, #464659 50%, #eee 50%);
+  .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #464659 var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
+  }
+
+  .dark .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #196aac var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
   }
 
   .playlist-title {
@@ -62,10 +68,6 @@
 
   .dark .currently-playing {
     background-color: #196aac;
-  }
-
-  .dark input[type="range"] {
-    background: linear-gradient(to right, #196aac 50%, #eee 50%);
   }
 
   .bg-white {

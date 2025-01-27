@@ -1,29 +1,39 @@
-import defaultCoverArt from '../assets/painted-in-blue.jpeg';
+import { useState } from 'react';
+import defaultCoverArt from '../assets/placeholder.svg';
+import { CoverArtProps } from '../types/types';
 
-interface Song {
-  id: string;
-  title: string;
-  artist: string;
-  albumArt: string;
-}
+const CoverArt: React.FC<CoverArtProps> = ({ currentSong, onMouseEnter, onMouseLeave }) => {
+  const [showLyrics, setShowLyrics] = useState(false);
 
-interface CoverArtProps {
-  currentSong: Song | null;
-}
+  const handleMouseEnter = () => {
+    setShowLyrics(true);
+    onMouseEnter?.();  // Optional chaining as onMouseEnter is optional
+  };
 
-const CoverArt: React.FC<CoverArtProps> = ({ currentSong }) => {
-  // Added console.log to check what image is being used
-  console.log('Current album art:', currentSong?.albumArt || 'Using default image');
+  const handleMouseLeave = () => {
+    setShowLyrics(false);
+    onMouseLeave?.();  // Optional chaining as onMouseLeave is optional
+  };
 
   return (
-    <div className="w-full h-full">
-      <img 
-        src={currentSong?.albumArt || defaultCoverArt} 
-        alt="Album Cover" 
-        className="w-full h-full rounded-lg" 
+    <div 
+      className="w-full h-full relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <img
+        src={currentSong?.coverArt || defaultCoverArt}
+        alt={currentSong?.title ? `${currentSong.title} by ${currentSong.artist}` : 'Album Cover'}
+        className="w-full h-full rounded-lg object-cover"
       />
+      
+      {showLyrics && currentSong?.lyrics && (
+        <div className="absolute inset-0 bg-black bg-opacity-75 rounded-lg p-4 overflow-y-auto text-white">
+          <p className="whitespace-pre-line">{currentSong.lyrics}</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default CoverArt;
