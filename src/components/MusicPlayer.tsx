@@ -176,7 +176,7 @@ const MusicPlayer: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+      <div className=" flex items-center justify-center">
         <div className="text-center p-2">
           <h2 className="text-xl font-semibold text-red-600 mb-1">Error</h2>
           <p className="text-gray-700 dark:text-gray-300">{error}</p>
@@ -192,7 +192,7 @@ const MusicPlayer: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen">
       <AudioPlayer
         currentSong={playerState.currentSong}
         isPlaying={playerState.isPlaying}
@@ -204,7 +204,7 @@ const MusicPlayer: React.FC = () => {
       
       {/* Large Screen Layout */}
       <div className="hidden lg:flex justify-between max-w-3xl mx-auto">
-        <div className="w-96 flex flex-col bg-white dark:bg-gray-800">
+        <div className="w-96 flex flex-col">
           <CoverArt currentSong={playerState.currentSong} />
           <div className="px-1">
             <CurrentlyPlaying currentSong={playerState.currentSong} />
@@ -228,7 +228,7 @@ const MusicPlayer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="w-96 bg-white dark:bg-gray-800">
+        <div className="w-96">
           <PlayList
             playlist={playlist}
             currentSong={playerState.currentSong}
@@ -239,7 +239,7 @@ const MusicPlayer: React.FC = () => {
 
       {/* Small Screen Layout */}
       <div className="lg:hidden flex flex-col max-w-sm mx-auto">
-        <div className="flex flex-col bg-white dark:bg-gray-800">
+        <div className="flex flex-col">
           <CoverArt currentSong={playerState.currentSong} />
           <div className="px-1">
             <CurrentlyPlaying currentSong={playerState.currentSong} />
@@ -263,7 +263,7 @@ const MusicPlayer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800">
+        <div className="">
           <PlayList
             playlist={playlist}
             currentSong={playerState.currentSong}

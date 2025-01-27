@@ -69,4 +69,15 @@
   .bg-white {
     background-color: white;
   }
+
+  html.dark, body.dark {
+  background-color: #464659;
+}
+.dark .cover-art,
+.dark .play-controls,
+.dark .volume-controls {
+  background-color: #464659;
+}
+
+
 }
