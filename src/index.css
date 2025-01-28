@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 :root {
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -10,7 +9,6 @@
   --width-height-player-large: 640px;
   --width-height-player-small: 1219px;
 }
-
 @layer base {
   *,
   *::after,
@@ -20,59 +18,66 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
-
 @layer components {
-  input[type="range"] {
-    background: linear-gradient(to right, #464659 50%, #eee 50%);
+  .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #464659 var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
   }
-
+  .dark .volume-controls input[type="range"] {
+    --volume-gradient: linear-gradient(to right, #196aac var(--volume), #eee var(--volume));
+    background: var(--volume-gradient);
+  }
   .playlist-title {
     color: #464659;
+    font-size: 0.8rem; /* Set font size for playlist titles */
+    font-weight: bold; /* Set font weight for playlist titles */
+    font-family: Arial, Helvetica, sans-serif;
   }
-
   .playlist-title-selected {
     color: white;
+    font-size: 0.8rem; /* Set font size for selected playlist titles */
+    font-weight: bold; /* Set font weight for selected playlist titles */
+     font-family: Arial, Helvetica, sans-serif;
   }
-
   .playlist-artist {
     color: #464659;
     opacity: 0.8;
+    font-size: 0.8rem; /* Set font size for playlist artists */
+    font-weight: bold; /* Set font weight for playlist artists */
+     font-family: Arial, Helvetica, sans-serif;
   }
-
   .playlist-artist-selected {
     color: white;
     opacity: 0.8;
+    font-size: 0.8rem; /* Set font size for selected playlist artists */
+    font-weight: bold; /* Set font weight for selected playlist artists */
+     font-family: Arial, Helvetica, sans-serif;
   }
-
   .currently-playing {
     background-color: #464659;
+    padding: .2rem .5rem;
   }
-
   .currently-playing-text {
     color: #FFF;
   }
-
-  .playlist-bg {
-    background-color: #fafafa;
-  }
-
   .icon-color {
     filter: invert(1) brightness(2);
   }
-
   .dark .currently-playing {
     background-color: #196aac;
   }
-
-  .dark input[type="range"] {
-    background: linear-gradient(to right, #196aac 50%, #eee 50%);
-  }
-
   .bg-white {
     background-color: white;
   }
 
-  .dark .dark\:bg-\[\#464659\] {
-    background-color: #464659;
-  }
+  html.dark, body.dark {
+  background-color: #464659;
+}
+.dark .cover-art,
+.dark .play-controls,
+.dark .volume-controls {
+  background-color: #464659;
+}
+
+
 }
