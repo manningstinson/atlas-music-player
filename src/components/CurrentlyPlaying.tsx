@@ -2,7 +2,7 @@ import { CurrentlyPlayingProps } from '../types/types';
 
 const CurrentlyPlaying: React.FC<CurrentlyPlayingProps> = ({ currentSong }) => {
   return (
-    <div className="flex items-center justify-between py-2 border border-gray-500 p-3 rounded-lg mt-7">
+    <div className="flex items-center justify-between py-2 border border-gray-500 p-3 rounded-lg">
       <div className="flex-1 truncate">
         <div className="text-3xl font-bold truncate text-gray-900">
           {currentSong?.title || 'Painted in Blue'}

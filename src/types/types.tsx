@@ -1,14 +1,14 @@
 // src/types/types.tsx
+// Updated to match API response format
 export interface Song {
   id: string;
   title: string;
   artist: string;
-  duration: number; // in seconds
-  coverArt: string;
-  audioUrl: string;
-  lyrics?: string;
-}
-
+  genre: string;
+  duration: number;
+  cover: string;
+  song: string;
+ }
 
 export interface SongTitleProps {
   currentSong?: Song;
@@ -63,7 +63,7 @@ export interface PlayListProps {
    playlist: {
     songs: Song[];
   };
-  currentSong?: Song;
+  currentSong?: Song | null;
   onSongSelect: (song: Song) => void;
   className?: string;
 }
@@ -89,3 +89,6 @@ export interface AudioPlayerProps {
 }
 
 
+export interface CoverArtProps {
+  currentSong: Song | null;
+}

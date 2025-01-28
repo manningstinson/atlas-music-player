@@ -17,10 +17,10 @@ const PlayControls: React.FC<PlayControlsProps> = ({
   onSpeedChange
 }) => {
   return (
-    <div className="flex items-center justify-between w-full mt-4 pb-4">
+    <div className="flex items-center justify-between full pb-6 mt-6">
       <button
         onClick={onSpeedChange}
-        className="flex items-center hover:opacity-80 text-2xl font-bold "
+        className="w-6 h-6 "
       >
         <span className="ml-1">{playbackSpeed}x</span>
       </button>

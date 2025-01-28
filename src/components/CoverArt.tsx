@@ -1,31 +1,78 @@
+import { useEffect, useState, useCallback } from 'react';
 import { CoverArtProps } from '../types/types';
 
 const CoverArt: React.FC<CoverArtProps> = ({ currentSong }) => {
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadImage = useCallback(async () => {
+    if (!currentSong?.cover) {
+      console.log('No cover URL found in currentSong');
+      setImageUrl('');
+      setIsLoading(false);
+      setError(null);
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(currentSong.cover, {
+        mode: 'cors',
+        credentials: 'omit',
+        headers: {
+          'Accept': 'image/*'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      setImageUrl(url);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Failed to load cover art:', error);
+      setError('Failed to load cover art.');
+      setIsLoading(false);
+    }
+  }, [currentSong]);
+
+  useEffect(() => {
+    loadImage();
+
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [currentSong, loadImage]); // Include loadImage in dependency array
+
   return (
-    <div className="w-[400px] aspect-square overflow-hidden rounded-lg">
-      {currentSong?.coverArt ? (
-        <img
-          src={currentSong.coverArt}
-          alt={`${currentSong.title} cover`}
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-          <svg 
-            className="w-24 h-24 text-gray-400" 
-            fill="none" 
-            viewBox="0 0 48 48"
-          >
-            <path 
-              d="M24 4C12.96 4 4 12.96 4 24s8.96 20 20 20 20-8.96 20-20S35.04 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z" 
-              fill="currentColor"
-            />
-            <path 
-              d="M24 14.4c-5.84 0-10.6 4.76-10.6 10.6 0 5.84 4.76 10.6 10.6 10.6 5.84 0 10.6-4.76 10.6-10.6 0-5.84-4.76-10.6-10.6-10.6zm0 17.2c-3.64 0-6.6-2.96-6.6-6.6 0-3.64 2.96-6.6 6.6-6.6 3.64 0 6.6 2.96 6.6 6.6 0 3.64-2.96 6.6-6.6 6.6z" 
-              fill="currentColor"
-            />
-          </svg>
+    <div className="w-[400px] h-96">
+      {error ? (
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-red-500">
+          {error}
         </div>
+      ) : (
+        <>
+          {isLoading ? (
+            <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg" />
+          ) : (
+            imageUrl ? ( // Check if imageUrl is not empty before setting src
+              <img
+                src={imageUrl}
+                alt={`${currentSong?.title} cover`}
+                className="w-full h-full rounded-lg object-cover"
+                onError={() => setError('Failed to load image.')} // Handle image load errors
+              />
+            ) : null
+          )}
+        </>
       )}
     </div>
   );

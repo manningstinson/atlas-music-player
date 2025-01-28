@@ -12,24 +12,50 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const audioRef = useRef<HTMLAudioElement>(new Audio());
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const loadAudio = async () => {
+      if (!currentSong?.song) return;
 
-    if (currentSong) {
-      audio.src = currentSong.audioUrl;
-      if (isPlaying) {
-        audio.play().catch(err => onError(new Error(err.message)));
+      try {
+        // Fetch the audio file first
+        const response = await fetch(currentSong.song);
+        const blob = await response.blob();
+        
+        // Create object URL from blob
+        const audioUrl = URL.createObjectURL(blob);
+        
+        const audio = audioRef.current;
+        audio.src = audioUrl;
+        
+        // Set properties
+        audio.volume = volume;
+        audio.playbackRate = playbackSpeed;
+
+        // Load the audio
+        await audio.load();
+        
+        if (isPlaying) {
+          try {
+            await audio.play();
+          } catch (error) {
+            console.error('Play error:', error);
+            onError(error instanceof Error ? error : new Error('Play failed'));
+          }
+        }
+
+        // Cleanup old object URL when source changes
+        return () => {
+          URL.revokeObjectURL(audioUrl);
+        };
+      } catch (error) {
+        console.error('Audio loading error:', error);
+        onError(error instanceof Error ? error : new Error('Failed to load audio'));
       }
-    }
-
-    audio.volume = volume;
-    audio.playbackRate = playbackSpeed;
-
-    return () => {
-      audio.pause();
-      audio.src = '';
     };
+
+    loadAudio();
   }, [currentSong, isPlaying, volume, playbackSpeed, onError]);
 
+  // Handle ended event
   useEffect(() => {
     const audio = audioRef.current;
     audio.addEventListener('ended', onEnded);

@@ -12,9 +12,10 @@ const DEFAULT_SONG: Song = {
   id: '',
   title: '',
   artist: '',
+  genre: '',
   duration: 0,
-  coverArt: '/default-cover.jpg',
-  audioUrl: '',
+  cover: '',
+  song: ''
 };
 
 const MusicPlayer: React.FC = () => {
@@ -46,30 +47,25 @@ const MusicPlayer: React.FC = () => {
         }
         
         const songsData = await response.json();
+        console.log('Fetched songs data (detailed):', JSON.stringify(songsData[0], null, 2));
         
         if (!Array.isArray(songsData)) {
           throw new Error('Expected an array of songs');
         }
 
-        // Transform the songs data to include audio URLs
-        const processedSongs: Song[] = songsData.map(song => ({
-          ...song,
-          coverArt: `/covers/${song.id}.jpg`,
-          audioUrl: `/audio/${song.id}.mp3`,
-        }));
-
         const newPlaylist: Playlist = {
           id: "default",
           name: "My Playlist",
-          songs: processedSongs,
+          songs: songsData,
         };
 
         setPlaylist(newPlaylist);
         
-        if (processedSongs.length > 0) {
+        if (songsData.length > 0) {
+          console.log('Setting initial song (detailed):', JSON.stringify(songsData[0], null, 2));
           setPlayerState(prev => ({
             ...prev,
-            currentSong: processedSongs[0],
+            currentSong: songsData[0],
           }));
         }
       } catch (error) {
@@ -135,10 +131,13 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleSpeedChange = (): void => {
+    const nextSpeed: 0.5 | 1 | 2 = 
+      playerState.playbackSpeed === 2 ? 0.5 : 
+      playerState.playbackSpeed === 1 ? 2 : 1;
+
     setPlayerState(prev => ({
       ...prev,
-      playbackSpeed: prev.playbackSpeed === 2 ? 0.5 : 
-                    prev.playbackSpeed === 1 ? 2 : 1
+      playbackSpeed: nextSpeed
     }));
   };
 
@@ -150,6 +149,7 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleSongSelect = (song: Song): void => {
+    console.log('Selected song (detailed):', JSON.stringify(song, null, 2));
     setPlayerState(prev => ({
       ...prev,
       currentSong: song,
@@ -176,7 +176,7 @@ const MusicPlayer: React.FC = () => {
 
   if (error) {
     return (
-      <div className=" flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <div className="text-center p-2">
           <h2 className="text-xl font-semibold text-red-600 mb-1">Error</h2>
           <p className="text-gray-700 dark:text-gray-300">{error}</p>
@@ -191,10 +191,14 @@ const MusicPlayer: React.FC = () => {
     );
   }
 
+  console.log('Current Song before null check:', JSON.stringify(playerState.currentSong, null, 2));
+  const currentSongOrNull = playerState.currentSong?.id ? playerState.currentSong : null;
+  console.log('Current Song after null check:', JSON.stringify(currentSongOrNull, null, 2));
+
   return (
-    <div className="min-h-screen">
+    <div className="">
       <AudioPlayer
-        currentSong={playerState.currentSong}
+        currentSong={currentSongOrNull}
         isPlaying={playerState.isPlaying}
         volume={playerState.volume}
         playbackSpeed={playerState.playbackSpeed}
@@ -203,14 +207,14 @@ const MusicPlayer: React.FC = () => {
       />
       
       {/* Large Screen Layout */}
-      <div className="hidden lg:flex justify-between max-w-3xl mx-auto">
-        <div className="w-96 flex flex-col">
-          <CoverArt currentSong={playerState.currentSong} />
+      <div className="hidden lg:flex justify-between max-w-4xl mx-auto">
+        <div className="max-w-xl flex flex-col gap-4 bg-white">
+          <CoverArt currentSong={currentSongOrNull} />
           <div className="px-1">
-            <CurrentlyPlaying currentSong={playerState.currentSong} />
-            <div className="mt-1">
+            <CurrentlyPlaying currentSong={currentSongOrNull} />
+            <div className="max-w-xl px-2">
               <PlayControls
-                currentSong={playerState.currentSong}
+                currentSong={currentSongOrNull}
                 playlist={playlist}
                 isPlaying={playerState.isPlaying}
                 isShuffle={playerState.isShuffle}
@@ -228,10 +232,10 @@ const MusicPlayer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="w-96">
+        <div className="w-135 bg-white dark:bg-[#464659]">
           <PlayList
             playlist={playlist}
-            currentSong={playerState.currentSong}
+            currentSong={currentSongOrNull}
             onSongSelect={handleSongSelect}
           />
         </div>
@@ -240,12 +244,12 @@ const MusicPlayer: React.FC = () => {
       {/* Small Screen Layout */}
       <div className="lg:hidden flex flex-col max-w-sm mx-auto">
         <div className="flex flex-col">
-          <CoverArt currentSong={playerState.currentSong} />
+          <CoverArt currentSong={currentSongOrNull} />
           <div className="px-1">
-            <CurrentlyPlaying currentSong={playerState.currentSong} />
+            <CurrentlyPlaying currentSong={currentSongOrNull} />
             <div className="mt-1">
               <PlayControls
-                currentSong={playerState.currentSong}
+                currentSong={currentSongOrNull}
                 playlist={playlist}
                 isPlaying={playerState.isPlaying}
                 isShuffle={playerState.isShuffle}
@@ -266,7 +270,7 @@ const MusicPlayer: React.FC = () => {
         <div className="">
           <PlayList
             playlist={playlist}
-            currentSong={playerState.currentSong}
+            currentSong={currentSongOrNull}
             onSongSelect={handleSongSelect}
           />
         </div>
